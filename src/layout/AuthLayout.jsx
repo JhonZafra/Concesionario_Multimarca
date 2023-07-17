@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-const AuthLayout = () => {
+const AuthLayout = ({ children }) => {
   return (
-    <div>Autenticación</div>
-  )
-}
+    <div className="flex flex-col items-center justify-center bg-gray-10 py-2 px-4">
+      <h2>Layout Autenticación</h2>
+      <div className="flex w-full">{children}</div>
+    </div>
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;

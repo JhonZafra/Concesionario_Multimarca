@@ -1,9 +1,17 @@
-import React from 'react'
+import Footer from "components/Footer";
+import Navbar from "components/Navbar";
+import React from "react";
 
-const PublicLayout = () => {
+const PublicLayout = ({ children }) => {
   return (
-    <div>PublicLayout</div>
-  )
-}
+    <div className="flex flex-col justify-between h-screen">
+      <Navbar />
+      <div className="h-full overflow-y-scroll bg-blue-400">
+        <main className="h-full"> {children} </main>
+        <Footer />
+      </div>
+    </div>
+  );
+};
 
-export default PublicLayout
+export default PublicLayout;
