@@ -18,7 +18,7 @@ useEffect( ()=> {
 },[nombreVehiculo])
 
 const enviarDatosAlBackend = () => {
-  console.log('El valor de la variable nombreVehiculo es:', nombreVehiculo)
+  console.log('El valor de la variable nombreVehiculo es el sigente:', nombreVehiculo)
 }
 
   return (
