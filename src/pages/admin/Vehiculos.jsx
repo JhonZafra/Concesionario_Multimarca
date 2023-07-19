@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const vehiculosBackend = [
   {
@@ -63,8 +65,13 @@ const Vehiculos = () => {
         {mostrarTabla ? (
           <TablaVehiculos listaVehiculos={vehiculo} />
         ) : (
-          <FormularioCreacionVehiculos />
+          <FormularioCreacionVehiculos
+            funcionParaMostrarTabla={setMostrarTabla}
+            listaVehiculos={vehiculo}
+            funcionParaAgregarVehiculo={setVehiculo}
+          />
         )}
+        <ToastContainer position="botton-center" autoClose={3000} />
       </div>
     </div>
   );
@@ -102,28 +109,75 @@ const TablaVehiculos = ({ listaVehiculos }) => {
   );
 };
 
-const FormularioCreacionVehiculos = () => {
+const FormularioCreacionVehiculos = ({
+  funcionParaMostrarTabla,
+  listaVehiculos,
+  funcionParaAgregarVehiculo,
+}) => {
+  const [nombre, setNombre] = useState();
+  const [marca, setMarca] = useState();
+  const [modelo, setModelo] = useState();
+
+  const enviarBackend = () => {
+    console.log("nombre", nombre, "marca", marca, "modelo", modelo);
+    toast.success("Vehiculo Guardado con éxito");
+    funcionParaMostrarTabla(true);
+    funcionParaAgregarVehiculo([...listaVehiculos,{nombre:nombre, marca:marca, modelo:modelo}])
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col  items-center justify-center">
       <h2 className="text-2xl font-bold">Crear nuevo Vehículo</h2>
-      <form className="grid grid-cols-2">
-        <input
-          type="Text"
-          className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
-        ></input>
-        <input
-          type="Text"
-          className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
-        ></input>
-        <input
-          type="Text"
-          className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
-        ></input>
-        <input
-          type="Text"
-          className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
-        ></input>
-        <button className="col-span-2 bg-green-500 p-2 rounded-full text-white shadow-md hover:bg-green-600">
+      <form className="flex flex-col">
+        <label className="flex flex-col" htmlFor="nombre">
+          Nombre del vehículo
+          <input
+            type="Text"
+            className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+            placeholder="Corolla"
+            value={nombre}
+            onChange={(e) => {
+              setNombre(e.target.value);
+            }}
+          ></input>
+        </label>
+        <label className="flex flex-col" htmlFor="marca">
+          Marca del vehículo
+          <select
+            className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+            name="marca"
+            onChange={(e) => {
+              setMarca(e.target.value);
+            }}
+          >
+            <option disabled>Selecciones una opción</option>
+            <option>Renoult</option>
+            <option>Toyota</option>
+            <option>Ford</option>
+            <option>Mazda</option>
+            <option>Chevrolet</option>
+          </select>
+        </label>
+        <label className="flex flex-col" htmlFor="modelo">
+          Nombre del vehículo
+          <input
+            className="bg-gray-50 border border-gray-600 p-2 rounded-lg m-2"
+            type="Number"
+            placeholder="2018"
+            min={2000}
+            max={2024}
+            value={modelo}
+            onChange={(e) => {
+              setModelo(e.target.value);
+            }}
+          ></input>
+        </label>
+        <button
+          className="col-span-2 bg-green-500 p-2 rounded-full text-white shadow-md hover:bg-green-600"
+          onClick={() => {
+            enviarBackend();
+          }}
+        >
           Guardar
         </button>
       </form>
