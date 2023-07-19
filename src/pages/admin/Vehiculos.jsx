@@ -122,7 +122,10 @@ const FormularioCreacionVehiculos = ({
     console.log("nombre", nombre, "marca", marca, "modelo", modelo);
     toast.success("Vehiculo Guardado con éxito");
     funcionParaMostrarTabla(true);
-    funcionParaAgregarVehiculo([...listaVehiculos,{nombre:nombre, marca:marca, modelo:modelo}])
+    funcionParaAgregarVehiculo([
+      ...listaVehiculos,
+      { nombre: nombre, marca: marca, modelo: modelo },
+    ]);
   };
 
   return (
@@ -139,6 +142,7 @@ const FormularioCreacionVehiculos = ({
             onChange={(e) => {
               setNombre(e.target.value);
             }}
+            required
           ></input>
         </label>
         <label className="flex flex-col" htmlFor="marca">
@@ -149,6 +153,7 @@ const FormularioCreacionVehiculos = ({
             onChange={(e) => {
               setMarca(e.target.value);
             }}
+            required
           >
             <option disabled>Selecciones una opción</option>
             <option>Renoult</option>
@@ -170,9 +175,11 @@ const FormularioCreacionVehiculos = ({
             onChange={(e) => {
               setModelo(e.target.value);
             }}
+            required
           ></input>
         </label>
         <button
+          type="submit"
           className="col-span-2 bg-green-500 p-2 rounded-full text-white shadow-md hover:bg-green-600"
           onClick={() => {
             enviarBackend();
