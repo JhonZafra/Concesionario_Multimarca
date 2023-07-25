@@ -1,9 +1,13 @@
-import React from 'react'
+
+import React from "react";
 
 const Index = () => {
+ 
   return (
-    <div >Contenido Landing Consesionario</div>
-  )
-}
+    <div >
+      Contenido Landing Consesionario
+    </div>
+  );
+};
 
-export default Index
+export default Index;
