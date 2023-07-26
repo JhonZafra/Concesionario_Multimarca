@@ -12,6 +12,7 @@ import "styles/styles.css";
 import { DarkModeContext } from "context/darkmode";
 import { useState, useEffect } from "react";
 
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   useEffect(() => {
